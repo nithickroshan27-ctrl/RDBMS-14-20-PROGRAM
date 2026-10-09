@@ -1,26 +1,24 @@
 USE CollegeDB;
 
-DROP PROCEDURE IF EXISTS DisplayStudents;
+-- create function 
 
-DELIMITER $$
+DELIMITER //
 
-CREATE PROCEDURE DisplayStudents()
+CREATE FUNCTION CountStudents(p_DepartmentID
+INT)
+RETURNS INT
+DETERMINISTIC
 BEGIN
+    DECLARE student_count INT;
 
-    -- Declare variables
+    SELECT COUNT(*)
+    INTO student_count
+    FROM Student
+    WHERE DepartmentID = p_DepartmentID;
 
-    -- Declare cursor
-
-    -- Declare NOT FOUND handler
-
-    -- Open cursor
-
-    -- Fetch records using a loop
-
-    -- Close cursor
-
-END $$
+    RETURN student_count;
+END //
 
 DELIMITER ;
 
-CALL DisplayStudents();
+SELECT CountStudents(10) AS TotalStudents;
